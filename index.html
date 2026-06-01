@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BioMercado Agrinho - Sustentabilidade no Prato</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <header>
+        <div class="container navbar">
+            <div class="logo">
+                <i class="fa-solid fa-leaf"></i> <span>BioMercado</span>
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#inicio">Início</a></li>
+                    <li><a href="#sobre">O Projeto</a></li>
+                    <li><a href="#produtos">Produtos</a></li>
+                    <li><a href="#impacto">Impacto</a></li>
+                </ul>
+            </nav>
+            <div class="cart-icon" onclick="toggleCarrinho()">
+                <i class="fa-solid fa-basket-shopping"></i>
+                <span id="cart-count">0</span>
+            </div>
+        </div>
+    </header>
+
+    <section id="inicio" class="hero">
+        <div class="hero-content">
+            <h1>Alimentos Saudáveis, Planeta Sustentável</h1>
+            <p>Conectando pequenos produtores locais diretamente à sua mesa. Apoie o ecossistema do campo com o projeto Agrinho.</p>
+            <a href="#produtos" class="btn-principal">Explorar Mercado</a>
+        </div>
+    </section>
+
+    <section id="sobre" class="container section">
+        <h2 class="section-title">Sobre o Nosso Biomercado</h2>
+        <div class="sobre-grid">
+            <div class="sobre-texto">
+                <p>O **BioMercado** é uma iniciativa desenvolvida para o programa **Agrinho**, com o objetivo de incentivar a agricultura familiar, o consumo de alimentos orgânicos e a economia circular.</p>
+                <p>Nossa plataforma simula a comercialização de produtos sem agrotóxicos, mostrando como a tecnologia pode ser uma forte aliada do desenvolvimento rural sustentável.</p>
+                <div class="pilares">
+                    <div class="pilar"><i class="fa-solid fa-seedling"></i> 100% Orgânico</div>
+                    <div class="pilar"><i class="fa-solid fa-users"></i> Apoio Local</div>
+                    <div class="pilar"><i class="fa-solid fa-earth-americas"></i> Eco-friendly</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="produtos" class="produtos-section">
+        <div class="container section">
+            <h2 class="section-title">Nossa Vitrine Orgânica</h2>
+            <div class="produtos-grid" id="produtos-container">
+                </div>
+        </div>
+    </section>
+
+    <section id="impacto" class="impacto-section">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">Nosso Impacto no Campo</h2>
+            <div class="impacto-grid">
+                <div class="impacto-card">
+                    <i class="fa-solid fa-tractor"></i>
+                    <h3 class="contador" data-target="150">0</h3>
+                    <p>Famílias Ajudadas</p>
+                </div>
+                <div class="impacto-card">
+                    <i class="fa-solid fa-droplet"></i>
+                    <h3 class="contador" data-target="12000">0</h3>
+                    <p>Litros de Água Poupados</p>
+                </div>
+                <div class="impacto-card">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <h3 class="contador" data-target="450">0</h3>
+                    <p>Quilos de Química Evitados</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="carrinho-lateral" class="carrinho-lateral">
+        <div class="carrinho-header">
+            <h3>Cesta de Compras</h3>
+            <button class="fechar-cart" onclick="toggleCarrinho()">&times;</button>
+        </div>
+        <div id="itens-carrinho" class="itens-carrinho">
+            <p class="carrinho-vazio">Sua cesta está vazia.</p>
+        </div>
+        <div class="carrinho-footer">
+            <div class="total-container">
+                <span>Total:</span>
+                <span id="total-preco">R$ 0,00</span>
+            </div>
+            <button class="btn-finalizar" onclick="finalizarCompra()">Finalizar Pedido</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Projeto Biomercado - Especial Agrinho. Desenvolvido com foco em Sustentabilidade.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
