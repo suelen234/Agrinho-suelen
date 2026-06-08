@@ -1,132 +1,164 @@
-// Base de dados simulada dos produtos orgânicos do Biomercado
-const produtos = [
-    { id: 1, nome: "Alface Crespa Orgânica", preco: 4.50, img: "https://images.unsplash.com/photo-1622484211148-7163014aa0c4?auto=format&fit=crop&w=300&q=80" },
-    { id: 2, nome: "Tomate Cereja (Bandeja)", preco: 7.90, img: "https://images.unsplash.com/photo-1595855759920-86582396756a?auto=format&fit=crop&w=300&q=80" },
-    { id: 3, nome: "Mel Silvestre Natural", preco: 22.00, img: "https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=300&q=80" },
-    { id: 4, nome: "Cesta de Legumes Variados", preco: 35.00, img: "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=300&q=80" }
+const products = [
+
+{
+id:1,
+name:"Trichoderma Premium",
+category:"Fungos",
+culture:"Tomate",
+pest:"Fungos do Solo",
+price:"R$ 79,90",
+image:"https://images.unsplash.com/photo-1464226184884-fa280b87c399"
+},
+
+{
+id:2,
+name:"Vespas Parasitoides",
+category:"Insetos",
+culture:"Milho",
+pest:"Lagartas",
+price:"R$ 120,00",
+image:"https://images.unsplash.com/photo-1452570053594-1b985d6ea890"
+},
+
+{
+id:3,
+name:"BioFert Max",
+category:"Biofertilizantes",
+culture:"Soja",
+pest:"Nutrição",
+price:"R$ 65,90",
+image:"https://images.unsplash.com/photo-1501004318641-b39e6451bec6"
+},
+
+{
+id:4,
+name:"Beauveria Bassiana",
+category:"Fungos",
+culture:"Café",
+pest:"Broca",
+price:"R$ 98,90",
+image:"https://images.unsplash.com/photo-1441974231531-c6227db76b6e"
+},
+
+{
+id:5,
+name:"Bacillus Thuringiensis",
+category:"Pragas",
+culture:"Algodão",
+pest:"Lagarta-do-cartucho",
+price:"R$ 85,00",
+image:"https://images.unsplash.com/photo-1416879595882-3373a0480b5b"
+},
+
+{
+id:6,
+name:"BioGrow Plus",
+category:"Biofertilizantes",
+culture:"Hortaliças",
+pest:"Nutrição",
+price:"R$ 58,90",
+image:"https://images.unsplash.com/photo-1466692476868-aef1dfb1e735"
+}
+
 ];
 
-let carrinho = [];
+const container = document.getElementById("products");
+const searchInput = document.getElementById("search");
 
-// Função para renderizar os produtos na tela
-function carregarProdutos() {
-    const container = document.getElementById('produtos-container');
-    container.innerHTML = "";
+function renderProducts(list){
 
-    produtos.forEach(prod => {
-        container.innerHTML += `
-            <div class="produto-card">
-                <img src="${prod.img}" alt="${prod.nome}" class="produto-img">
-                <div class="produto-info">
-                    <h3>${prod.nome}</h3>
-                    <p class="preco">R$ ${prod.preco.toFixed(2).replace('.', ',')}</p>
-                    <button class="btn-adicionar" onclick="adicionarAoCarrinho(${prod.id})">
-                        <i class="fa-solid fa-cart-plus"></i> Adicionar à Cesta
-                    </button>
-                </div>
-            </div>
-        `;
-    });
+container.innerHTML = "";
+
+list.forEach(product => {
+
+container.innerHTML += `
+
+<div class="product">
+
+<img src="${product.image}" alt="${product.name}">
+
+<div class="product-content">
+
+<span class="category">
+${product.category}
+</span>
+
+<h3>${product.name}</h3>
+
+<p><strong>Cultura:</strong> ${product.culture}</p>
+
+<p><strong>Controla:</strong> ${product.pest}</p>
+
+<p class="price">${product.price}</p>
+
+<button class="buy">
+Adicionar ao Carrinho
+</button>
+
+</div>
+
+</div>
+
+`;
+
+});
+
 }
 
-// Abrir e fechar a barra lateral do carrinho
-function toggleCarrinho() {
-    const cartLateral = document.getElementById('carrinho-lateral');
-    cartLateral.classList.toggle('active');
+function updateStats(){
+
+document.getElementById("totalProducts").textContent =
+products.length;
+
+document.getElementById("totalCultures").textContent =
+new Set(products.map(p => p.culture)).size;
+
+document.getElementById("totalCategories").textContent =
+new Set(products.map(p => p.category)).size;
+
 }
 
-// Adicionar item ao carrinho de compras
-function adicionarAoCarrinho(id) {
-    const produto = produtos.find(p => p.id === id);
-    const itemExistente = carrinho.find(item => item.id === id);
+searchInput.addEventListener("input", () => {
 
-    if (itemExistente) {
-        itemExistente.quantidade++;
-    } else {
-        carrinho.push({ ...produto, quantidade: 1 });
-    }
+const value = searchInput.value.toLowerCase();
 
-    atualizarCarrinho();
+const filtered = products.filter(product =>
+
+product.name.toLowerCase().includes(value) ||
+
+product.category.toLowerCase().includes(value) ||
+
+product.culture.toLowerCase().includes(value) ||
+
+product.pest.toLowerCase().includes(value)
+
+);
+
+renderProducts(filtered);
+
+});
+
+document.querySelectorAll("button[data-category]")
+.forEach(button => {
+
+button.addEventListener("click", () => {
+
+const category = button.dataset.category;
+
+if(category === "Todos"){
+renderProducts(products);
+return;
 }
 
-// Atualiza a interface do carrinho e totais
-function atualizarCarrinho() {
-    const containerItens = document.getElementById('itens-carrinho');
-    const cartCount = document.getElementById('cart-count');
-    const totalPreco = document.getElementById('total-preco');
+const filtered = products.filter(product =>
+product.category === category
+);
 
-    // Atualiza número de itens no ícone
-    const totalItens = carrinho.reduce((acc, item) => acc + item.quantidade, 0);
-    cartCount.innerText = totalItens;
+renderProducts(filtered);
 
-    if (carrinho.length === 0) {
-        containerItens.innerHTML = '<p class="carrinho-vazio">Sua cesta está vazia.</p>';
-        totalPreco.innerText = "R$ 0,00";
-        return;
-    }
+});
 
-    containerItens.innerHTML = "";
-    let valorTotal = 0;
+});
 
-    carrinho.forEach(item => {
-        valorTotal += item.preco * item.quantidade;
-        containerItens.innerHTML += `
-            <div class="item-no-carrinho">
-                <div>
-                    <h4>${item.nome}</h4>
-                    <small>${item.quantidade}x R$ ${item.preco.toFixed(2)}</small>
-                </div>
-                <button onclick="removerDoCarrinho(${item.id})" style="background:none; border:none; color:red; cursor:pointer;">
-                    <i class="fa-solid fa-trash"></i>
-                </button>
-            </div>
-        `;
-    });
-
-    totalPreco.innerText = `R$ ${valorTotal.toFixed(2).replace('.', ',')}`;
-}
-
-// Remover item do carrinho
-function removerDoCarrinho(id) {
-    carrinho = carrinho.filter(item => item.id !== id);
-    atualizarCarrinho();
-}
-
-// Finalizar simulação de compra
-function finalizarCompra() {
-    if (carrinho.length === 0) {
-        alert("Sua cesta está vazia!");
-        return;
-    }
-    alert("Pedido simulado com sucesso! Obrigado por apoiar a agricultura familiar no Agrinho! 🌱");
-    carrinho = [];
-    atualizarCarrinho();
-    toggleCarrinho();
-}
-
-// Efeito de Contador Dinâmico para a seção de Impacto (Gera destaque para os avaliadores)
-function iniciarContadores() {
-    const contadores = document.querySelectorAll('.contador');
-    contadores.forEach(contador => {
-        const target = +contador.getAttribute('data-target');
-        const incremento = target / 100;
-
-        const atualizarValor = () => {
-            const valorAtual = +contador.innerText;
-            if (valorAtual < target) {
-                contador.innerText = Math.ceil(valorAtual + incremento);
-                setTimeout(atualizarValor, 20);
-            } else {
-                contador.innerText = target;
-            }
-        };
-        atualizarValor();
-    });
-}
-
-// Inicializações ao carregar a página
-window.onload = () => {
-    carregarProdutos();
-    // Executa a animação dos números após 1 segundo
-    setTimeout(iniciarContadores, 1000);
-};
+updateStats();
+renderProducts(products);
