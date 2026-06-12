@@ -3,143 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BioMercado - Do Bioinsumo à Mesa</title>
+    <title>BioMercado - Vitrina Dinâmica</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <header class="main-header">
-        <div class="header-container">
-            <div class="logo-area" id="logoReset">
-                <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                </svg>
-                <div class="logo-text">
-                    <h1>Bio<span class="highlight">Mercado</span></h1>
-                    <p>Vitrina Dinâmica de Bioinsumos & Hortofrutícolas</p>
-                </div>
-            </div>
-
-            <div class="search-wrapper">
-                <div class="search-box">
-                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="11" cy="11" r="8"></circle>
-                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                    </svg>
-                    <input type="text" id="searchInput" placeholder="Pesquise pragas, culturas, frutas, legumes ou bioinsumos...">
-                </div>
-            </div>
-
-            <div class="cart-wrapper" onclick="abrirCarrinho()">
-                <div class="cart-icon-container">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="9" cy="21" r="1"></circle>
-                        <circle cx="20" cy="21" r="1"></circle>
-                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-                    </svg>
-                    <span class="cart-badge" id="cartBadge">0</span>
-                </div>
-                <div class="cart-totals">
-                    <span class="cart-label">A minha Cesta</span>
-                    <span class="cart-value" id="cartTotal">0.00 €</span>
-                </div>
+    <section class="contadores-container">
+        <div class="card-contador">
+            <span class="icone">📦</span>
+            <div>
+                <h3 id="total-itens">0</h3>
+                <p>ITENS LISTADOS</p>
             </div>
         </div>
-    </header>
-
-    <section class="hero-section">
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-            <span class="hero-tag">Agricultura Regenerativa de Alta Performance</span>
-            <h2>Tecnologia Biológica para o Campo, Alimentos Saudáveis para a Mesa</h2>
-            <p>Substitua químicos por defensores ecológicos e compre alimentos cultivados de forma 100% sustentável.</p>
-        </div>
-    </section>
-
-    <section class="filter-section">
-        <div class="filter-headline">
-            <h3>Navegue por Categoria</h3>
-            <p>Clique abaixo para filtrar instantaneamente os resultados no ecrã</p>
-        </div>
-        <div class="filter-tabs">
-            <button class="tab-btn active" data-category="todos">
-                <span class="tab-icon">🌐</span> Todos os Produtos
-            </button>
-            <button class="tab-btn" data-category="fungos">
-                <span class="tab-icon">🍄</span> Fungos Benéficos
-            </button>
-            <button class="tab-btn" data-category="insetos">
-                <span class="tab-icon">🐝</span> Insetos Auxiliares
-            </button>
-            <button class="tab-btn" data-category="biofertilizantes">
-                <span class="tab-icon">🧪</span> Biofertilizantes
-            </button>
-            <button class="tab-btn" data-category="pragas">
-                <span class="tab-icon">🛡️</span> Controlo de Pragas
-            </button>
-            <button class="tab-btn" data-category="frutas">
-                <span class="tab-icon">🍎</span> Frutas Frescas
-            </button>
-            <button class="tab-btn" data-category="verduras">
-                <span class="tab-icon">🥦</span> Verduras e Legumes
-            </button>
-        </div>
-    </section>
-
-    <section class="metrics-dashboard">
-        <div class="metric-card">
-            <div class="metric-icon bg-green">📦</div>
-            <div class="metric-info">
-                <h4 id="metric-produtos">0</h4>
-                <p>Itens Listados</p>
+        <div class="card-contador">
+            <span class="icone">🌾</span>
+            <div>
+                <h3 id="total-variedades">0</h3>
+                <p>VARIEDADES/ALVOS</p>
             </div>
         </div>
-        <div class="metric-card">
-            <div class="metric-icon bg-amber">🌾</div>
-            <div class="metric-info">
-                <h4 id="metric-variedades">0</h4>
-                <p>Variedades/Alvos</p>
-            </div>
-        </div>
-        <div class="metric-card">
-            <div class="metric-icon bg-blue">⚡</div>
-            <div class="metric-info">
-                <h4 id="metric-status">Ativo</h4>
-                <p>Filtragem JavaScript</p>
+        <div class="card-contador">
+            <span class="icone">⚡</span>
+            <div>
+                <h3>Ativo</h3>
+                <p>FILTRAGEM JAVASCRIPT</p>
             </div>
         </div>
     </section>
 
-    <main class="market-layout">
-        <div class="grid-header">
-            <h2 id="sectionTitle">Todos os Produtos Disponíveis</h2>
-            <p id="sectionCount">A mostrar todos os itens da plataforma</p>
+    <section class="categorias-section">
+        <h2>Navegue por Categoria</h2>
+        <p>Clique abaixo para filtrar instantaneamente os resultados no ecrã</p>
+        
+        <div class="botoes-container">
+            <button class="btn-categoria active" data-categoria="todos">🌐 Todos os Produtos</button>
+            <button class="btn-categoria" data-categoria="fungos">🍄 Fungos Benéficos</button>
+            <button class="btn-categoria" data-categoria="insetos">🐝 Insetos Auxiliares</button>
+            <button class="btn-categoria" data-categoria="biofertilizantes">🌱 Biofertilizantes</button>
+            <button class="btn-categoria" data-categoria="controlo">🛡️ Controlo de Pragas</button>
         </div>
+    </section>
 
-        <div class="products-grid" id="productsGrid">
+    <main class="vitrine-section">
+        <h2>Todos os Produtos Disponíveis</h2>
+        
+        <div class="produtos-grid" id="produtos-grid">
+            <div class="produto-card" data-categoria="fungos" data-alvos="1">
+                <div class="tag-categoria">Fungos Benéficos</div>
+                <h3>Trichoderma harzianum</h3>
+                <p class="descricao">Combate fungos fitopatógenos de solo como Pythium e Rhizoctonia.</p>
+                <div class="solucao-box">
+                    <strong>Solução:</strong> Proteção radicular e estimulação do crescimento da planta.
+                </div>
             </div>
 
-        <div class="empty-state hidden" id="emptyState">
-            <div class="empty-icon">🔍</div>
-            <h3>Sem correspondências para a sua procura</h3>
-            <p>Não encontrámos resultados para o termo digitado ou para esta categoria específica. Tente procurar por palavras como "Soja", "Lagarta", "Tomate", "Morango" ou limpe a pesquisa.</p>
-            <button class="reset-search-btn" onclick="limparFiltros()">Limpar Filtros e Ver Tudo</button>
+            <div class="produto-card" data-categoria="fungos" data-alvos="1">
+                <div class="tag-categoria">Fungos Benéficos</div>
+                <h3>Beauveria bassiana</h3>
+                <p class="descricao">Fungo entomopatógeno para controlo biológico de insetos-praga.</p>
+                <div class="solucao-box">
+                    <strong>Solução:</strong> Eliminação de Mosca-branca, Tripes e Cigarrinhas.
+                </div>
+            </div>
+
+            <div class="produto-card" data-categoria="insetos" data-alvos="1">
+                <div class="tag-categoria">Insetos Auxiliares</div>
+                <h3>Joaninhas (Coccinellidae)</h3>
+                <p class="descricao">Predador natural altamente eficaz no ecossistema agrícola.</p>
+                <div class="solucao-box">
+                    <strong>Solução:</strong> Controlo biológico intensivo de pulgões e ácaros.
+                </div>
+            </div>
+
+            <div class="produto-card" data-categoria="biofertilizantes" data-alvos="2">
+                <div class="tag-categoria">Biofertilizantes</div>
+                <h3>Extrato de Algas Marinhas</h3>
+                <p class="descricao">Fertilizante orgânico rico em aminoácidos e fito-hormonas naturais.</p>
+                <div class="solucao-box">
+                    <strong>Solução:</strong> Aumento da resistência ao stress hídrico e térmico.
+                </div>
+            </div>
         </div>
     </main>
-
-    <div class="toast" id="toast">Produto adicionado com sucesso!</div>
-
-    <footer class="main-footer">
-        <div class="footer-content">
-            <p><strong>BioMercado S.A.</strong> - Plataforma Avançada de E-commerce Educativo e Sustentabilidade.</p>
-            <p>Desenvolvido com JavaScript Nativo Avançado (Métodos Modernos de Arrays Functional).</p>
-        </div>
-    </footer>
 
     <script src="script.js"></script>
 </body>
 </html>
-
