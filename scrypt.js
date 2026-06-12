@@ -121,3 +121,95 @@ function atualizarInterfaceCarrinho() {
     document.getElementById("cart-total-price").textContent = valorTotal.toFixed(2);
     document.getElementById("modal-total-price").textContent = valorTotal.toFixed(2);
 }
+const produtos = [
+  {
+    id: 1,
+    nome: "Trichoderma sp.",
+    categoria: "fungos-beneficos",
+    preco: 45.00,
+    imagem: "caminho/para/imagem1.jpg",
+    descricao: "Fungo benéfico para controle de doenças radiculares."
+  },
+  {
+    id: 2,
+    nome: "Mariquita (Joaninha)",
+    categoria: "insetos-auxiliares",
+    preco: 30.00,
+    imagem: "caminho/para/imagem2.jpg",
+    descricao: "Predador natural de pulgões e ácaros."
+  },
+  // Adicione mais produtos de outras categorias aqui
+];
+function exibirProdutos(listaDeProdutos) {
+  const container = document.getElementById('container-produtos');
+  container.innerHTML = ''; // Limpa o container antes de renderizar
+
+  if (listaDeProdutos.length === 0) {
+    container.innerHTML = '<p class="aviso">Nenhum produto encontrado nesta categoria.</p>';
+    return;
+  }
+
+  listaDeProdutos.forEach(produto => {
+    const card = document.createElement('div');
+    card.className = 'card-produto'; // Estilize esta classe no seu CSS
+    
+    card.innerHTML = `
+      <img src="${produto.imagem}" alt="${produto.nome}" class="produto-img">
+      <h3>${produto.nome}</h3>
+      <p class="descricao">${produto.descricao}</p>
+      <span class="preco">€ ${produto.preco.toFixed(2)}</span>
+      <button onclick="adicionarAoCarrinho(${produto.id})" class="btn-comprar">
+        Adicionar à Cesta
+      </button>
+    `;
+    
+    container.appendChild(card);
+  });
+  
+  // Atualiza o contador de itens listados no painel superior
+  document.getElementById('contador-itens').innerText = listaDeProdutos.length;
+}
+
+// Inicializa a página exibindo todos os produtos
+exibirProdutos(produtos);
+function filtrarCategoria(categoria) {
+  if (categoria === 'todos') {
+    exibirProdutos(produtos);
+  } else {
+    const produtosFiltrados = produtos.filter(p => p.categoria === categoria);
+    exibirProdutos(produtosFiltrados);
+  }
+}
+
+// Exemplo de como associar aos botões via JavaScript:
+document.querySelectorAll('.botoes-categoria').forEach(botao => {
+  botao.addEventListener('click', (e) => {
+    const categoria = e.target.getAttribute('data-categoria');
+    filtrarCategoria(categoria);
+  });
+});
+let carrinho = [];
+
+function adicionarAoCarrinho(idProduto) {
+  const produto = produtos.find(p => p.id === idProduto);
+  
+  if (produto) {
+    carrinho.push(produto);
+    atualizarCarrinho();
+  }
+}
+
+function atualizarCarrinho() {
+  const totalItens = carrinho.length;
+  
+  // Calcula o valor total dos produtos no carrinho
+  const valorTotal = carrinho.reduce((total, produto) => total + produto.preco, 0);
+  
+  // Atualiza a interface gráfica do topo (A MINHA CESTA)
+  const infoCesta = document.querySelector('.paineis-cesta'); // Ajuste o seletor conforme seu HTML
+  
+  // Atualiza o texto do botão do carrinho
+  // Exemplo: "5 itens | 150.00 €"
+  document.getElementById('cesta-contador').innerText = `${totalItens} itens`;
+  document.getElementById('cesta-total').innerText = `${valorTotal.toFixed(2)} €`;
+}
