@@ -8,84 +8,91 @@
 </head>
 <body>
 
-    <section class="contadores-container">
-        <div class="card-contador">
-            <span class="icone">📦</span>
+    <header class="main-header">
+        <div class="logo-area">
+            <span class="logo-icon">🌿</span>
             <div>
-                <h3 id="total-itens">0</h3>
+                <h1>BioMercado</h1>
+                <p>Vitrina Dinâmica de Bioinsumos & Hortofrutícolas</p>
+            </div>
+        </div>
+        
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Pesquise pragas, culturas, frutas, legumes ou bioinsumos...">
+        </div>
+
+        <div class="cart-box" id="cart-toggle">
+            <span class="cart-icon">🛒</span>
+            <div class="cart-info">
+                <span class="cart-title">A MINHA CESTA</span>
+                <span class="cart-totals"><span id="cart-count">0</span> itens | <span id="cart-total-price">0.00</span> €</span>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero-banner">
+        <h2>Tecnologia Biológica para o Campo, Alimentos Saudáveis para a Mesa</h2>
+        <p>Substitua químicos por defensores ecológicos e compre alimentos cultivados de forma 100% sustentável.</p>
+    </section>
+
+    <section class="metrics-panel">
+        <div class="metric-card">
+            <div class="metric-icon">📦</div>
+            <div>
+                <h3 id="counter-items">0</h3>
                 <p>ITENS LISTADOS</p>
             </div>
         </div>
-        <div class="card-contador">
-            <span class="icone">🌾</span>
+        <div class="metric-card">
+            <div class="metric-icon">🌾</div>
             <div>
-                <h3 id="total-variedades">0</h3>
+                <h3 id="counter-targets">0</h3>
                 <p>VARIEDADES/ALVOS</p>
             </div>
         </div>
-        <div class="card-contador">
-            <span class="icone">⚡</span>
+        <div class="metric-card">
+            <div class="metric-icon">⚡</div>
             <div>
-                <h3>Ativo</h3>
+                <h3 class="status-active">Ativo</h3>
                 <p>FILTRAGEM JAVASCRIPT</p>
             </div>
         </div>
     </section>
 
-    <section class="categorias-section">
+    <nav class="categories-nav">
         <h2>Navegue por Categoria</h2>
         <p>Clique abaixo para filtrar instantaneamente os resultados no ecrã</p>
-        
-        <div class="botoes-container">
-            <button class="btn-categoria active" data-categoria="todos">🌐 Todos os Produtos</button>
-            <button class="btn-categoria" data-categoria="fungos">🍄 Fungos Benéficos</button>
-            <button class="btn-categoria" data-categoria="insetos">🐝 Insetos Auxiliares</button>
-            <button class="btn-categoria" data-categoria="biofertilizantes">🌱 Biofertilizantes</button>
-            <button class="btn-categoria" data-categoria="controlo">🛡️ Controlo de Pragas</button>
+        <div class="categories-container">
+            <button class="category-btn active" data-category="all">🌐 Todos os Produtos</button>
+            <button class="category-btn" data-category="fungos">🍄 Fungos Benéficos</button>
+            <button class="category-btn" data-category="insetos">🐝 Insetos Auxiliares</button>
+            <button class="category-btn" data-category="biofertilizantes">🌱 Biofertilizantes</button>
+            <button class="category-btn" data-category="controlo">🛡️ Controlo de Pragas</button>
+            <button class="category-btn" data-category="frutas">🍎 Frutas Frescas</button>
         </div>
-    </section>
+    </nav>
 
-    <main class="vitrine-section">
+    <main class="showcase-container">
         <h2>Todos os Produtos Disponíveis</h2>
-        
-        <div class="produtos-grid" id="produtos-grid">
-            <div class="produto-card" data-categoria="fungos" data-alvos="1">
-                <div class="tag-categoria">Fungos Benéficos</div>
-                <h3>Trichoderma harzianum</h3>
-                <p class="descricao">Combate fungos fitopatógenos de solo como Pythium e Rhizoctonia.</p>
-                <div class="solucao-box">
-                    <strong>Solução:</strong> Proteção radicular e estimulação do crescimento da planta.
-                </div>
+        <div class="products-grid" id="products-container">
             </div>
-
-            <div class="produto-card" data-categoria="fungos" data-alvos="1">
-                <div class="tag-categoria">Fungos Benéficos</div>
-                <h3>Beauveria bassiana</h3>
-                <p class="descricao">Fungo entomopatógeno para controlo biológico de insetos-praga.</p>
-                <div class="solucao-box">
-                    <strong>Solução:</strong> Eliminação de Mosca-branca, Tripes e Cigarrinhas.
-                </div>
-            </div>
-
-            <div class="produto-card" data-categoria="insetos" data-alvos="1">
-                <div class="tag-categoria">Insetos Auxiliares</div>
-                <h3>Joaninhas (Coccinellidae)</h3>
-                <p class="descricao">Predador natural altamente eficaz no ecossistema agrícola.</p>
-                <div class="solucao-box">
-                    <strong>Solução:</strong> Controlo biológico intensivo de pulgões e ácaros.
-                </div>
-            </div>
-
-            <div class="produto-card" data-categoria="biofertilizantes" data-alvos="2">
-                <div class="tag-categoria">Biofertilizantes</div>
-                <h3>Extrato de Algas Marinhas</h3>
-                <p class="descricao">Fertilizante orgânico rico em aminoácidos e fito-hormonas naturais.</p>
-                <div class="solucao-box">
-                    <strong>Solução:</strong> Aumento da resistência ao stress hídrico e térmico.
-                </div>
-            </div>
-        </div>
     </main>
+
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-sidebar-header">
+            <h3>Sua Cesta</h3>
+            <button id="cart-close">✕</button>
+        </div>
+        <div class="cart-sidebar-items" id="cart-items-container">
+            </div>
+        <div class="cart-sidebar-footer">
+            <div class="total-row">
+                <span>Total:</span>
+                <span><span id="modal-total-price">0.00</span> €</span>
+            </div>
+            <button class="checkout-btn" onclick="alert('Funcionalidade de checkout integrada!')">Finalizar Pedido</button>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
